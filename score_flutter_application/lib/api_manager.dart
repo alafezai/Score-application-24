@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 import 'package:score_flutter_application/soccermodel.dart';
-import 'package:soccer_tutorial/soccermodel.dart';
 
 class SoccerApi {
   //now let's set our variables
@@ -30,20 +29,24 @@ class SoccerApi {
   //but before this we need to create our model
 
   //Now we finished with our Model
-  Future<List<SoccerMatch>> getAllMatches() async {
+  Future<List<SoccerMatch>?> getAllMatches() async {
     Response res = await get(apiUrl, headers: headers);
     var body;
 
     if (res.statusCode == 200) {
       // this mean that we are connected to the data base
-      body = jsonDecode(res.body);
-      List<dynamic> matchesList = body['response'];
-      print("Api service: ${body}"); // to debug
-      List<SoccerMatch> matches = matchesList
-          .map((dynamic item) => SoccerMatch.fromJson(item))
-          .toList();
+      try {
+        body = jsonDecode(res.body);
+        List<dynamic> matchesList = body['response'];
+        print("Api service: ${body}"); // to debug
+        List<SoccerMatch> matches = matchesList
+            .map((dynamic item) => SoccerMatch.fromJson(item))
+            .toList();
 
-      return matches;
+        return matches;
+      } catch (Execiption) {
+        return null;
+      }
     }
   }
 }
