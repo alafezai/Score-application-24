@@ -45,7 +45,7 @@ class _SoccerAppState extends State<SoccerApp> {
         builder: (context, snapshot) {
           //the future builder is very intersting to use when you work with api
           if (snapshot.hasData) {
-            print((snapshot.data));
+            print((snapshot.data.noSuchMethod(DataCell.empty)));
 
             ///  with out lenght
             //return PageBody(snapshot.data); //errors
