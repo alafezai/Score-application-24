@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:score_flutter_application/pagebody.dart';
 
 import 'api_manager.dart';
 
@@ -31,7 +30,7 @@ class _SoccerAppState extends State<SoccerApp> {
       appBar: AppBar(
         backgroundColor: Color(0xFFFAFAFA),
         elevation: 0.0,
-        title: Text(
+        title: const Text(
           "SOCCERBOARD",
           style: TextStyle(color: Colors.black),
         ),
@@ -45,16 +44,19 @@ class _SoccerAppState extends State<SoccerApp> {
         builder: (context, snapshot) {
           //the future builder is very intersting to use when you work with api
           if (snapshot.hasData) {
-            print((snapshot.data.noSuchMethod(DataCell.empty)));
-
-            ///  with out lenght
-            //return PageBody(snapshot.data); //errors
-            return Text("Errors");
-          } else {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            // if (kDebugMode) {
+            //   // ignore: avoid_print
+            //   print((snapshot.data.noSuchMethod(DataCell.empty)));
           }
+
+          ///  with out lenght
+          //return PageBody(snapshot.data); //errors
+          return Text("Errors");
+          // } else {
+          //   return const Center(
+          //     child: CircularProgressIndicator(),
+          //   );
+          // }
         }, // here we will buil the app layout
       ),
     );
